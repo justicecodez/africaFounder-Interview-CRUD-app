@@ -7,8 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Guest\LoginFormRequest;
 use App\Http\Requests\Guest\RegisterRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
