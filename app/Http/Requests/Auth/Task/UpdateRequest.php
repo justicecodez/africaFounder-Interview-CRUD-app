@@ -11,7 +11,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth('sanctum')->check();;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'sometimes|required|string|max:255',
+            'description' => 'nullable|string|max:5000',
+            'status' => 'sometimes|required|in:pending,in-progress,completed',
         ];
     }
 }

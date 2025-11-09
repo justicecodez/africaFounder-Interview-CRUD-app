@@ -45,7 +45,6 @@ class RegisterRequest extends FormRequest
                 'regex:/[a-z]/', // must contain lowercase
                 'regex:/[0-9]/', // must contain number
                 'regex:/[@$!%*#?&]/', // must contain special char
-                'confirmed', // matches password_confirmation field
             ],
         ];
     }
