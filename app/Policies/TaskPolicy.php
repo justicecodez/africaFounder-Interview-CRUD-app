@@ -21,10 +21,11 @@ class TaskPolicy
      */
     public function view(User $user, Task $task): Response
     {
-        if ($user->id===$task->user_id) {
+        if ($user->id === $task->user_id) {
             return Response::allow();
         }
-        return Response::denyWithStatus(403, "You do not own this Task");
+
+        return Response::denyWithStatus(403, 'You do not own this Task');
     }
 
     /**
@@ -40,10 +41,11 @@ class TaskPolicy
      */
     public function update(User $user, Task $task): Response
     {
-        if ($user->id===$task->user_id) {
+        if ($user->id === $task->user_id) {
             return Response::allow();
         }
-        return Response::denyWithStatus(403, "You do not own this Task");
+
+        return Response::denyWithStatus(403, 'You do not own this Task');
     }
 
     /**
@@ -51,10 +53,11 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): Response
     {
-        if ($user->id===$task->user_id) {
+        if ($user->id === $task->user_id) {
             return Response::allow();
         }
-        return Response::denyWithStatus(403, "You do not own this Task");
+
+        return Response::denyWithStatus(403, 'You do not own this Task');
     }
 
     /**

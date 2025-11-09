@@ -22,13 +22,14 @@ class TaskController extends Controller
         if ($task === false) {
             return response()->json([
                 'status' => 'error',
-                'data' => 'Failed to fetch task list.'
+                'data' => 'Failed to fetch task list.',
             ], 500);
         }
+
         return response()->json(
             [
                 'status' => 'success',
-                'data' =>  TaskResource::collection($task),
+                'data' => TaskResource::collection($task),
                 'meta' => [
                     'current_page' => $task->currentPage(),
                     'last_page' => $task->lastPage(),
@@ -37,9 +38,9 @@ class TaskController extends Controller
                 ],
                 'links' => [
                     'first' => $task->url(1),
-                    'last'  => $task->url($task->lastPage()),
-                    'prev'  => $task->previousPageUrl(),
-                    'next'  => $task->nextPageUrl(),
+                    'last' => $task->url($task->lastPage()),
+                    'prev' => $task->previousPageUrl(),
+                    'next' => $task->nextPageUrl(),
                 ],
             ],
             200
@@ -57,12 +58,13 @@ class TaskController extends Controller
         if ($data === false) {
             return response()->json([
                 'status' => 'error',
-                'data' => 'Failed to create task.'
+                'data' => 'Failed to create task.',
             ], 500);
         }
+
         return response()->json([
             'status' => 'success',
-            'data' => new TaskResource($data)
+            'data' => new TaskResource($data),
         ], 201);
     }
 
@@ -76,37 +78,37 @@ class TaskController extends Controller
         if ($data === false) {
             return response()->json([
                 'status' => 'error',
-                'data' => 'Failed to fetch task.'
+                'data' => 'Failed to fetch task.',
             ], 500);
-        }else if($data=="invalid"){
+        } elseif ($data == 'invalid') {
             return response()->json([
                 'status' => 'error',
-                'data' => 'Task not found.'
+                'data' => 'Task not found.',
             ], 404);
         }
 
         return response()->json([
             'status' => 'success',
-            'data' => new TaskResource($data)
+            'data' => new TaskResource($data),
         ], 200);
     }
-
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Task $task, UpdateRequest $updateRequest,  User $user)
+    public function update(Task $task, UpdateRequest $updateRequest, User $user)
     {
         Gate::authorize('update', $task);
-        $validated=$updateRequest->validated();
-        $data=$user->updateTask($task, $validated);
-        if (!$data) {
+        $validated = $updateRequest->validated();
+        $data = $user->updateTask($task, $validated);
+        if (! $data) {
             return response()->json([
                 'status' => 'error',
-                'data' => 'Failed to update task.'
+                'data' => 'Failed to update task.',
             ], 500);
         }
-        return response()->json( ['status'=>'success', 'data'=>new TaskResource($data)]);
+
+        return response()->json(['status' => 'success', 'data' => new TaskResource($data)]);
     }
 
     /**
@@ -115,32 +117,35 @@ class TaskController extends Controller
     public function destroy(Task $task, User $user)
     {
         Gate::authorize('delete', $task);
-        $data=$user->deleteTask($task);
-        if (!$data) {
+        $data = $user->deleteTask($task);
+        if (! $data) {
             return response()->json([
                 'status' => 'error',
-                'data' => 'Failed to delete task.'
+                'data' => 'Failed to delete task.',
             ], 500);
         }
+
         return response()->json([
-            'status'=>'success',
-            'data'=>"Task Deleted",
+            'status' => 'success',
+            'data' => 'Task Deleted',
         ], 204);
     }
 
-    public function statusToggler(Request $request, User $user){
-        $status=$request->status;
-        $data=$user->statusToggler($status);
+    public function statusToggler(Request $request, User $user)
+    {
+        $status = $request->status;
+        $data = $user->statusToggler($status);
         if ($data === false) {
             return response()->json([
                 'status' => 'error',
-                'data' => 'Failed to fetch task list by Status.'
+                'data' => 'Failed to fetch task list by Status.',
             ], 500);
         }
+
         return response()->json(
             [
                 'status' => 'success',
-                'data' =>  TaskResource::collection($data),
+                'data' => TaskResource::collection($data),
                 'meta' => [
                     'current_page' => $data->currentPage(),
                     'last_page' => $data->lastPage(),
@@ -149,9 +154,9 @@ class TaskController extends Controller
                 ],
                 'links' => [
                     'first' => $data->url(1),
-                    'last'  => $data->url($data->lastPage()),
-                    'prev'  => $data->previousPageUrl(),
-                    'next'  => $data->nextPageUrl(),
+                    'last' => $data->url($data->lastPage()),
+                    'prev' => $data->previousPageUrl(),
+                    'next' => $data->nextPageUrl(),
                 ],
             ],
             200

@@ -18,9 +18,11 @@ class User
         try {
             $user = ModelsUser::create($data);
             $token = $user->createToken('api-token')->plainTextToken;
+
             return ['user' => $user, 'token' => $token];
         } catch (\Throwable $th) {
-            Log::error('User Registration Error: ' . $th->getMessage());
+            Log::error('User Registration Error: '.$th->getMessage());
+
             return false;
         }
     }
@@ -31,13 +33,15 @@ class User
             $user = ModelsUser::where('email', $data['email'])->first();
             if (! $user || ! Hash::check($data['password'], $user->password)) {
                 return response()->json([
-                    'message' => 'The provided credentials are incorrect.'
+                    'message' => 'The provided credentials are incorrect.',
                 ], 401);
             }
             $token = $user->createToken('api-token')->plainTextToken;
+
             return ['user' => $user, 'token' => $token];
         } catch (\Throwable $th) {
-            Log::error('User Login Error: ' . $th->getMessage());
+            Log::error('User Login Error: '.$th->getMessage());
+
             return false;
         }
     }

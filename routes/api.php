@@ -6,18 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'middleware' => ['guest.sanctum'],
+    'middleware' => ['guest.sanctum', 'throttle:60,1'],
 ], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
 });
 
 Route::group([
-    'middleware' => ['auth:sanctum'],
+    ['auth:sanctum', 'throttle:60,1'],
 ], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::apiResource("tasks", TaskController::class);
+    Route::apiResource('tasks', TaskController::class);
     Route::get('tasks/status/{status}', [TaskController::class, 'statusToggler']);
 });
 

@@ -14,26 +14,29 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
         // Login logic here
-        $data =$user->login($validated);
-        if ($data===false) {
-            return response()->json(['message'=>'Login failed'], 500);
+        $data = $user->login($validated);
+        if ($data === false) {
+            return response()->json(['message' => 'Login failed'], 500);
         }
+
         return response()->json($data, 200);
     }
 
     public function register(RegisterRequest $request, User $user)
     {
         $validated = $request->validated();
-        $data=$user->create($validated);
-        if ($data===false) {
-            return response()->json(['message'=>'Registration failed'], 500);
+        $data = $user->create($validated);
+        if ($data === false) {
+            return response()->json(['message' => 'Registration failed'], 500);
         }
+
         return response()->json($data, 201);
     }
 
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
-        return response()->json(['message'=>'Logged out']);
+
+        return response()->json(['message' => 'Logged out']);
     }
 }

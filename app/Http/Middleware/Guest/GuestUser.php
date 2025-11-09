@@ -18,10 +18,11 @@ class GuestUser
         if ($request->user('sanctum')) {
             if ($request->expectsJson()) {
                 return response()->json([
-                    'message' => 'You are already authenticated.'
+                    'message' => 'You are already authenticated.',
                 ], 403);
             }
         }
+
         return $next($request);
     }
 }

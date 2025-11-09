@@ -3,7 +3,6 @@
 namespace App\Actions\Auth;
 
 use App\Models\Task\Task;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 
 class User
@@ -19,14 +18,15 @@ class User
     /**
      * Execute the action.
      */
-
     public function taskList($status = false)
     {
         try {
             $task = Task::select('id', 'title', 'description', 'status')->paginate(15);
+
             return $task;
         } catch (\Throwable $th) {
-            Log::error('Fetch Task List Error: ' . $th->getMessage());
+            Log::error('Fetch Task List Error: '.$th->getMessage());
+
             return false;
         }
     }
@@ -35,9 +35,11 @@ class User
     {
         try {
             $task = Task::create($data);
+
             return $task;
         } catch (\Throwable $th) {
-            Log::error('Create Task Error: ' . $th->getMessage());
+            Log::error('Create Task Error: '.$th->getMessage());
+
             return false;
         }
     }
@@ -45,12 +47,14 @@ class User
     public function findTaskById($task)
     {
         try {
-            if (!$task) {
-                return "invalid";
+            if (! $task) {
+                return 'invalid';
             }
+
             return $task;
         } catch (\Throwable $th) {
-            Log::error('Find Task Error: ' . $th->getMessage());
+            Log::error('Find Task Error: '.$th->getMessage());
+
             return false;
         }
     }
@@ -59,9 +63,11 @@ class User
     {
         try {
             $task->update($data);
+
             return $task; // Return the updated model
         } catch (\Throwable $th) {
-            Log::error('Updating Task Error: ' . $th->getMessage());
+            Log::error('Updating Task Error: '.$th->getMessage());
+
             return false;
         }
     }
@@ -70,19 +76,24 @@ class User
     {
         try {
             $task->delete();
+
             return true;
         } catch (\Throwable $th) {
-            Log::error("Deleting Task Error: ", $th->getMessage());
+            Log::error('Deleting Task Error: ', $th->getMessage());
+
             return false;
         }
     }
 
-    public function statusToggler(string $status) {
+    public function statusToggler(string $status)
+    {
         try {
-            $tasks=Task::where('status', $status)->paginate(15);
+            $tasks = Task::where('status', $status)->paginate(15);
+
             return $tasks;
         } catch (\Throwable $th) {
-            Log::error("Error Changing Task Status", $th->getMessage());
+            Log::error('Error Changing Task Status', $th->getMessage());
+
             return false;
         }
     }
