@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
-                'email:rfc,dns', // RFC-compliant + checks domain via DNS
+                // 'email:rfc,dns', // RFC-compliant + checks domain via DNS
                 'max:100',
                 'unique:users,email', // prevent duplicate accounts
             ],

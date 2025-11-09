@@ -45,7 +45,7 @@ class User
     public function findTaskById($task)
     {
         try {
-            if(!$task){
+            if (!$task) {
                 return "invalid";
             }
             return $task;
@@ -55,18 +55,19 @@ class User
         }
     }
 
-    public function updateTask($task, $data){
+    public function updateTask($task, $data)
+    {
         try {
-            $task=$task->update($data);
-            return $task;
+            $task->update($data);
+            return $task; // Return the updated model
         } catch (\Throwable $th) {
-            Log::error('updating Task Error: ' . $th->getMessage());
+            Log::error('Updating Task Error: ' . $th->getMessage());
             return false;
         }
-
     }
 
-    public function deleteTask($task){
+    public function deleteTask($task)
+    {
         try {
             $task->delete();
             return true;
@@ -74,6 +75,5 @@ class User
             Log::error("Deleting Task Error: ", $th->getMessage());
             return false;
         }
-
     }
 }

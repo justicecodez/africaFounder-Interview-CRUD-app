@@ -25,7 +25,7 @@ class LoginFormRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
-                'email:rfc,dns', // checks format + domain existence
+                // 'email:rfc,dns', // checks format + domain existence
                 'max:100',
                 'exists:users,email', // email must exist in users table
             ],
