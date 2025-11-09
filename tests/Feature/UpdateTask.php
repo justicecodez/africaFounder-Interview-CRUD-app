@@ -21,11 +21,11 @@ class UpdateTask extends TestCase
         //UPDATING TASK TABLE OF ID 1
         $this->put('/api/tasks/1',['description'=>'description changed'])
             ->assertStatus(201)
-            ->assertJsonStructure(['status', 'message']);
+            ->assertJsonStructure(['status', 'data']);
 
             //UPDATING TASK TABLE OF ID 2
         $this->put('/api/tasks/2',['title'=>'title changed'])
             ->assertStatus(201)
-            ->assertJsonStructure(['status', 'message']);
+            ->assertJsonStructure(['status', 'data']);
     }
 }

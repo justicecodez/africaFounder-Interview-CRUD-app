@@ -22,6 +22,6 @@ class GetAllTask extends TestCase
         //GETING TASK FROM TASK TABLE
         $this->getJson('/api/tasks')
             ->assertStatus(200)
-            ->assertJsonStructure(['status', 'message', 'meta', 'links']);
+            ->assertJsonStructure(['status', 'data', 'meta', 'links']);
     }
 }

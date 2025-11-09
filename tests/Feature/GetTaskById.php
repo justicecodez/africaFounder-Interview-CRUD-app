@@ -21,11 +21,11 @@ class GetTaskById extends TestCase
         //GETTING TASK FORM TASK TABLE OF ID 1
         $this->getJson('/api/tasks/1')
             ->assertStatus(200)
-            ->assertJsonStructure(['status', 'message',]);
+            ->assertJsonStructure(['status', 'data',]);
 
         //GETTING TASK FORM TASK TABLE OF ID 2
         $this->getJson('/api/tasks/2')
             ->assertStatus(200)
-            ->assertJsonStructure(['status', 'message',]);
+            ->assertJsonStructure(['status', 'data',]);
     }
 }

@@ -18,6 +18,7 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::apiResource("tasks", TaskController::class);
+    Route::get('tasks/status/{status}', [TaskController::class, 'statusToggler']);
 });
 
 // Route::get('/user', function (Request $request) {

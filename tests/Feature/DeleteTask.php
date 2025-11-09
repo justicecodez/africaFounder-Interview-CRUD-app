@@ -21,6 +21,6 @@ class DeleteTask extends TestCase
         //DELETE TASK OF ID 1 FROM TASK TABLE
         $this->delete('/api/tasks/1')
             ->assertStatus(200)
-            ->assertJsonStructure(['status', 'message',]);
+            ->assertJsonStructure(['status', 'data',]);
     }
 }

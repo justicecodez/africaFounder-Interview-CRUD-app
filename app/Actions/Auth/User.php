@@ -76,4 +76,14 @@ class User
             return false;
         }
     }
+
+    public function statusToggler(string $status) {
+        try {
+            $tasks=Task::where('status', $status)->paginate(15);
+            return $tasks;
+        } catch (\Throwable $th) {
+            Log::error("Error Changing Task Status", $th->getMessage());
+            return false;
+        }
+    }
 }
